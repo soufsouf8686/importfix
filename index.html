@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ImportFix — Shopify weigert je productbestand? Ik maak het import-klaar.</title>
+  <meta name="description" content="ImportFix maakt een geweigerd Shopify-productbestand import-klaar. €19 per bestand, levering binnen 24 uur na ontvangst van bestand en betaling. Geen verzonnen productgegevens.">
+  <style>
+    :root {
+      --bg: #f6f3ee;
+      --paper: #fffcf8;
+      --ink: #1c1916;
+      --muted: #5c574f;
+      --line: #ddd6cb;
+      --accent: #1f4a3a;
+      --accent-soft: #e7efe9;
+      --warn: #6b3f1d;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+    }
+    a { color: var(--accent); }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav a:not(.logo) {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin-left: 1rem;
+    }
+    .nav a:not(.logo):hover { color: var(--ink); }
+    .notice {
+      background: #efe6d4;
+      color: var(--warn);
+      font-size: 0.92rem;
+      padding: 0.65rem 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid var(--line);
+    }
+    h1, h2, h3 { line-height: 1.25; font-weight: 700; }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.45rem);
+      margin: 0 0 0.85rem;
+    }
+    h2 { font-size: 1.4rem; margin: 0 0 0.75rem; }
+    h3 { font-size: 1.05rem; margin: 1.1rem 0 0.4rem; }
+    .hero { padding: 3rem 0 2.2rem; }
+    .lede { font-size: 1.15rem; color: var(--muted); margin: 0 0 1.4rem; max-width: 38rem; }
+    .price-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem 1.2rem;
+      align-items: baseline;
+      margin: 0 0 1.5rem;
+    }
+    .price {
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+    .price span { font-size: 1rem; font-weight: 500; color: var(--muted); }
+    .meta { color: var(--muted); }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.7rem 1.15rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+    .btn:hover { filter: brightness(1.08); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      margin-left: 0.5rem;
+    }
+    section {
+      padding: 0 0 2.4rem;
+    }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 1.25rem 1.3rem;
+    }
+    ol.steps { margin: 0; padding-left: 1.2rem; }
+    ol.steps li { margin: 0.5rem 0; }
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 680px) {
+      .split { grid-template-columns: 1fr; }
+      .nav a:not(.logo) { margin-left: 0.65rem; }
+    }
+    .do, .dont { margin: 0; padding-left: 1.15rem; }
+    .do li, .dont li { margin: 0.35rem 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      background: var(--paper);
+    }
+    th, td {
+      border: 1px solid var(--line);
+      padding: 0.4rem 0.5rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--accent-soft); font-weight: 600; }
+    .caption {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin: 0 0 0.6rem;
+    }
+    .table-wrap { overflow-x: auto; margin: 0.7rem 0 1.2rem; }
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--accent-soft);
+      color: var(--accent);
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      margin-bottom: 0.35rem;
+    }
+    #en {
+      border-top: 1px solid var(--line);
+      padding-top: 2.2rem;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+    #en h2 { color: var(--ink); }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 1.4rem 0 2rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    code { font-size: 0.88em; background: #efeae2; padding: 0.05rem 0.28rem; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="logo" href="#top">ImportFix</a>
+      <nav>
+        <a href="#werkwijze">Werkwijze</a>
+        <a href="#voorbeeld">Voorbeeld</a>
+        <a href="#aanvragen">Aanvragen</a>
+        <a href="#en">EN</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <h1>Shopify weigert je productbestand? Ik maak het import-klaar.</h1>
+        <p class="lede">Een Excel-export of leveranciersbestand dat in je spreadsheet nog klopt, wordt door Shopify soms geweigerd. ImportFix zet dat bestand om naar een importklare product-CSV, zonder productgegevens te verzinnen.</p>
+        <div class="price-row">
+          <div class="price">€19 <span>per bestand, excl. btw indien van toepassing</span></div>
+        </div>
+        <p class="meta">Tot 500 rijen per bestand. Groter op aanvraag. Levering binnen 24 uur na ontvangst van het bestand én de betaling. Je ontvangt van mij een betaalverzoek of factuur.</p>
+        <p>
+          <a class="btn" href="mailto:soufsouf.8686@gmail.com?subject=ImportFix%20aanvraag">Bestand aanvragen</a>
+          <a class="btn btn-ghost" href="#wat">Wat ik wel en niet doe</a>
+        </p>
+      </div>
+    </section>
+
+    <section id="werkwijze">
+      <div class="wrap">
+        <h2>Hoe het werkt</h2>
+        <div class="card">
+          <ol class="steps">
+            <li>Je mailt het geweigerde bestand (CSV, TSV of Excel) en, als je die hebt, de exacte foutmelding van Shopify. Stuur geen wachtwoorden of winkelinlog.</li>
+            <li>Je ontvangt van mij een betaalverzoek of factuur van €19.</li>
+            <li>Binnen 24 uur na ontvangst van het bestand én de betaling stuur ik je drie dingen terug: de gerepareerde CSV, een wijzigingslog en een validatierapport met wat er nog openstaat.</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section id="wat">
+      <div class="wrap">
+        <h2>Wat ik wel en niet repareren</h2>
+        <div class="split">
+          <div class="card">
+            <h3>Wel: veilige opmaakfixes</h3>
+            <ul class="do">
+              <li>Encoding naar UTF-8, regeleinden naar LF</li>
+              <li>Puntkomma of tab omzetten naar komma</li>
+              <li>Kolomkoppen trimmen en mappen naar de huidige Shopify-namen</li>
+              <li>Typografische aanhalingstekens rechtzetten</li>
+              <li>Ja/nee of hoofdletters normaliseren naar geldige boolean- en statuswaarden</li>
+              <li>Decimale komma en valutatekens in bestaande getallen (bijvoorbeeld <code>€19,99</code> → <code>19.99</code>)</li>
+              <li>Lege fulfillment service zetten op <code>manual</code></li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Niet: gegevens verzinnen</h3>
+            <ul class="dont">
+              <li>Geen ontbrekende titels, handles, prijzen of SKU’s invullen</li>
+              <li>Geen variantopties of productcategorieën raden</li>
+              <li>Geen afbeeldings-URL’s verzinnen of bestanden voor je hosten</li>
+              <li>Geen shop-specifieke fulfillment-handles verzinnen</li>
+              <li>Ontbrekende verplichte velden meld ik alleen in het validatierapport</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="voorbeeld">
+      <div class="wrap">
+        <h2>Voorbeeld, voor en na</h2>
+        <p class="caption"><strong>Fictief voorbeeld.</strong> De producten, SKU’s en de winkel “Voorbeeld Atelier” zijn verzonnen. Geen echte klantdata.</p>
+        <p>Een typisch Nederlands Excel-exportbestand gebruikt puntkomma’s, eurotekens en “Ja” in plaats van <code>true</code>. Na ImportFix is het een UTF-8-CSV met komma’s, dezelfde SKU’s en dezelfde variantopties. Alleen de schrijfwijze is aangepast; bedragen blijven gelijk.</p>
+
+        <div class="tag">Voor</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Handle</th>
+                <th>Title</th>
+                <th>Variant SKU</th>
+                <th>Variant Price</th>
+                <th>Published</th>
+                <th>Fulfillment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>linnen-shopper</td>
+                <td>Linnen shopper tas</td>
+                <td>LS-001</td>
+                <td>€19,99</td>
+                <td>Ja</td>
+                <td><em>(leeg)</em></td>
+              </tr>
+              <tr>
+                <td>wolvilt-onderzetter</td>
+                <td>Wolvilt onderzetter set</td>
+                <td>WV-T-10</td>
+                <td>€12,50</td>
+                <td>Ja</td>
+                <td><em>(leeg)</em></td>
+              </tr>
+              <tr>
+                <td>wolvilt-onderzetter</td>
+                <td></td>
+                <td>WV-O-10</td>
+                <td>€12,50</td>
+                <td></td>
+                <td><em>(leeg)</em></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="tag">Na</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>URL handle</th>
+                <th>Title</th>
+                <th>SKU</th>
+                <th>Price</th>
+                <th>Published on online store</th>
+                <th>Fulfillment service</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>linnen-shopper</td>
+                <td>Linnen shopper tas</td>
+                <td>LS-001</td>
+                <td>19.99</td>
+                <td>true</td>
+                <td>manual</td>
+              </tr>
+              <tr>
+                <td>wolvilt-onderzetter</td>
+                <td>Wolvilt onderzetter set</td>
+                <td>WV-T-10</td>
+                <td>12.50</td>
+                <td>true</td>
+                <td>manual</td>
+              </tr>
+              <tr>
+                <td>wolvilt-onderzetter</td>
+                <td></td>
+                <td>WV-O-10</td>
+                <td>12.50</td>
+                <td></td>
+                <td>manual</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="caption">Je ontvangt er een wijzigingslog bij (wat er precies is veranderd) en een validatierapport (wat er nog openstaat en niet is ingevuld).</p>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="wrap">
+        <h2>Privacy</h2>
+        <div class="card">
+          <ul class="do">
+            <li>Ik gebruik je bestand alleen voor deze opdracht.</li>
+            <li>Het wordt niet gebruikt voor marketing, training of andere klanten.</li>
+            <li>Ik vraag geen inloggegevens van je Shopify-winkel.</li>
+            <li>Het bestand en de bijbehorende uitvoer verwijder ik 14 dagen na levering.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="aanvragen">
+      <div class="wrap">
+        <h2>Aanvragen</h2>
+        <div class="card">
+          <p>Stuur een mail naar <strong>soufsouf.8686@gmail.com</strong> met je bestand en, als dat kan, de foutmelding van Shopify. Zet in het onderwerp bijvoorbeeld “Aanvraag ImportFix”.</p>
+          <p>Daarna stuur ik je een betaalverzoek of factuur. Na betaling én ontvangst van het bestand heb je het pakket binnen 24 uur.</p>
+          <p><a class="btn" href="mailto:soufsouf.8686@gmail.com?subject=ImportFix%20aanvraag">Mail soufsouf.8686@gmail.com</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="en">
+      <div class="wrap">
+        <h2>English</h2>
+        <p>Shopify rejected your product file? ImportFix prepares it for import. You receive a corrected CSV, a change log, and a validation report. Price: €19 per file (up to 500 rows; larger files on request). Delivery within 24 hours after I have received both the file and payment. I will send you a payment request or invoice.</p>
+        <p>I only apply safe formatting fixes (encoding, delimiters, headers, quotes, booleans, number notation, empty fulfillment → <code>manual</code>). I do not invent titles, handles, prices, SKUs, categories or image URLs. Missing required fields are reported, not filled in.</p>
+        <p>Your file is used only for this job and deleted 14 days after delivery. I will never ask for your Shopify login. The before/after example on this page is fictional.</p>
+        <p>To request a repair, email <strong>soufsouf.8686@gmail.com</strong>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>ImportFix is een dienst voor het repareren van Shopify-productbestanden. Deze pagina bevat geen klantervaringen of resultaatcijfers.</p>
+    </div>
+  </footer>
+</body>
+</html>
